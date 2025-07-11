@@ -106,7 +106,7 @@ const BubbleChart = ({ labelsData, onLabelClick, selectedLabel }: BubbleChartPro
     const simulation = d3.forceSimulation<BubbleNode>(nodes)
       .force('charge', d3.forceManyBody().strength(5))
       .force('center', d3.forceCenter(dimensions.width / 2, dimensions.height / 2))
-      .force('collision', d3.forceCollide().radius(d => (d.radius || 0) + 2))
+      .force('collision', d3.forceCollide<BubbleNode>().radius(d => d.radius))
       .on('tick', ticked);
     
     // Create bubble groups
@@ -147,8 +147,8 @@ const BubbleChart = ({ labelsData, onLabelClick, selectedLabel }: BubbleChartPro
         d3.select(this).select('circle')
           .transition()
           .duration(300)
-          .attr('stroke', d => d.id === selectedLabel ? '#ffffff' : 'none')
-          .attr('stroke-width', d => d.id === selectedLabel ? 2 : 0);
+          .attr('stroke', function(d: any) { return (d as BubbleNode).id === selectedLabel ? '#ffffff' : 'none'; })
+          .attr('stroke-width', function(d: any) { return (d as BubbleNode).id === selectedLabel ? 2 : 0; });
           
         setHoveredLabel(null);
       })
@@ -186,7 +186,7 @@ const BubbleChart = ({ labelsData, onLabelClick, selectedLabel }: BubbleChartPro
     // Update label visibility on zoom
     const updateLabelVisibility = () => {
       bubbles.selectAll('text')
-        .style('opacity', d => (d.radius * zoomLevel > 25) ? 1 : 0);
+        .style('opacity', function(d: any) { return ((d as BubbleNode).radius * zoomLevel > 25) ? 1 : 0; });
     };
     
     // Watch for zoom level changes

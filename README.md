@@ -2,8 +2,6 @@
 
 An interactive single-page web application built with Next.js that visualizes music label data from MixesDB. The application features a bubble chart visualization and a list view, allowing users to explore label popularity and the mixes where they appear.
 
-![MixesDB Label Visualizer](https://via.placeholder.com/800x400?text=MixesDB+Label+Visualizer)
-
 ## Features
 
 - **Interactive Bubble Chart Visualization** using D3.js
@@ -37,7 +35,7 @@ An interactive single-page web application built with Next.js that visualizes mu
 
 1. Clone the repository
    ```bash
-   git clone https://github.com/yourusername/mixesdb-data-visualizer.git
+   git clone https://github.com/EvgeniQwerty/mixesdb-data-visualizer.git
    cd mixesdb-data-visualizer
    ```
 
@@ -106,10 +104,6 @@ The application expects a JSON file with the following structure:
 - **React Virtuoso** - Virtualized list component
 - **TailwindCSS** - Utility-first CSS framework
 - **TypeScript** - Type-safe JavaScript
-
-## License
-
-MIT
 
 ## Contributing
 
