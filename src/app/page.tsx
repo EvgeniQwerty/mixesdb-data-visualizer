@@ -11,7 +11,7 @@ import { LabelData, LabelsData } from '@/types';
 export default function Home() {
   const [labelsData, setLabelsData] = useState<LabelsData | null>(null);
   const [filteredLabels, setFilteredLabels] = useState<Record<string, LabelData>>({});
-  const [minCount, setMinCount] = useState<number>(15);
+  const [minCount, setMinCount] = useState<number>(50);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [viewMode, setViewMode] = useState<'chart' | 'list'>('chart');

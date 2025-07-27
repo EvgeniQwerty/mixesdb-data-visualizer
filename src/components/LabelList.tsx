@@ -43,8 +43,10 @@ const LabelList = ({ labelsData, onLabelClick, selectedLabel }: LabelListProps) 
     <div className="space-y-4">
       <div className="bg-card rounded-lg overflow-hidden shadow-lg">
         <Virtuoso
+          ref={virtuosoRef}
           style={{ height: '500px' }}
           totalCount={sortedLabels.length}
+          overscan={200}
           itemContent={(index) => {
             const label = sortedLabels[index];
             const isSelected = label.name === selectedLabel;
@@ -56,7 +58,7 @@ const LabelList = ({ labelsData, onLabelClick, selectedLabel }: LabelListProps) 
                   onClick={() => handleRowClick(label.name)}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ delay: index * 0.03, duration: 0.3 }}
+                  transition={{ duration: 0.2 }}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
@@ -112,9 +114,9 @@ const LabelList = ({ labelsData, onLabelClick, selectedLabel }: LabelListProps) 
                               target="_blank"
                               rel="noopener noreferrer"
                               className="block text-sm text-blue-400 hover:text-blue-300 truncate"
-                              initial={{ opacity: 0, y: 5 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ delay: mixIndex * 0.02 }}
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              transition={{ duration: 0.1 }}
                             >
                               {mixName}
                             </motion.a>

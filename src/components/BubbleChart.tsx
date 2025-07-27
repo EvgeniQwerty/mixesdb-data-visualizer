@@ -100,7 +100,19 @@ const BubbleChart = ({ labelsData, onLabelClick, selectedLabel }: BubbleChartPro
     // Color scale
     const colorScale = d3.scaleSequential()
       .domain([1, maxCount])
-      .interpolator(d3.interpolateViridis);
+      .interpolator(d3.interpolateRainbow);
+      
+    // Alternative approach: use a custom color scale that better distributes colors
+    // This ensures small labels (which are the majority) get a wider range of colors
+    const getColor = (value: number) => {
+      // Use a logarithmic scale to better distribute colors across the range
+      // This gives more color variation to smaller values (80% of the labels)
+      const logScale = d3.scaleLog()
+        .domain([1, maxCount])
+        .range([0, 1]);
+      
+      return d3.interpolateRainbow(logScale(value));
+    };
     
     // Create simulation
     const simulation = d3.forceSimulation<BubbleNode>(nodes)
@@ -161,7 +173,7 @@ const BubbleChart = ({ labelsData, onLabelClick, selectedLabel }: BubbleChartPro
     // Add circles to groups
     bubbles.append('circle')
       .attr('r', d => d.radius)
-      .attr('fill', d => colorScale(d.value))
+      .attr('fill', d => getColor(d.value))
       .attr('stroke', d => d.id === selectedLabel ? '#ffffff' : 'none')
       .attr('stroke-width', d => d.id === selectedLabel ? 2 : 0)
       .attr('fill-opacity', 0.7)
