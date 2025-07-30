@@ -100,7 +100,7 @@ const BubbleChart = ({ labelsData, onLabelClick, selectedLabel }: BubbleChartPro
     // Color scale
     const colorScale = d3.scaleSequential()
       .domain([1, maxCount])
-      .interpolator(d3.interpolateRainbow);
+      .interpolator(d3.interpolateViridis);
       
     // Alternative approach: use a custom color scale that better distributes colors
     // This ensures small labels (which are the majority) get a wider range of colors
@@ -111,7 +111,7 @@ const BubbleChart = ({ labelsData, onLabelClick, selectedLabel }: BubbleChartPro
         .domain([1, maxCount])
         .range([0, 1]);
       
-      return d3.interpolateRainbow(logScale(value));
+      return d3.interpolateViridis(logScale(value));
     };
     
     // Create simulation
